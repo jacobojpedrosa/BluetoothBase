@@ -24,7 +24,7 @@ public class Bluetooth extends Thread {
     
     private static final UUID MY_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
     
-    
+    //comentario 4
 	public boolean isConnected() {
 		return connected;
 	}
