@@ -11,7 +11,7 @@ import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.content.DialogInterface;
-
+//Comentarios
 public class Bluetooth extends Thread {
 	private String address;
 	private BluetoothAdapter mBluetoothAdapter = null;
