@@ -4,7 +4,7 @@ import android.app.Application;
 import android.content.SharedPreferences;
 
 public class BluetoothManager {
-	private BluetoothDevice[] devices = new BluetoothDevice[5];
+	private Bluetooth[] devices = new Bluetooth[5];
 	private Application application = null;
 	private SharedPreferences preferences = null; 
 	

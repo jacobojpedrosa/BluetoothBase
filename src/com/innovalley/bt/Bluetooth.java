@@ -12,8 +12,6 @@ import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.content.DialogInterface;
 
-// Sin Comentarios
-//VAleeee,Ahora sigue sin comentarios
 public class Bluetooth extends Thread {
 	private String address;
 	private BluetoothAdapter mBluetoothAdapter = null;
@@ -24,7 +22,6 @@ public class Bluetooth extends Thread {
     
     private static final UUID MY_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
     
-   //aqui deberia saltar un error!
 	public boolean isConnected() {
 		return connected;
 	}
