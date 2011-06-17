@@ -13,7 +13,7 @@ import android.bluetooth.BluetoothSocket;
 import android.content.DialogInterface;
 
 // Sin Comentarios
-//Pues si que hay comentarios
+//Ahora sigue sin comentarios
 public class Bluetooth extends Thread {
 	private String address;
 	private BluetoothAdapter mBluetoothAdapter = null;
