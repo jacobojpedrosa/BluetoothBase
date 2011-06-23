@@ -18,8 +18,7 @@ public class Bluetooth extends Thread {
     private BluetoothSocket btSocket = null;
     private OutputStream outStream = null;
     private boolean connected;
-    private Application application;
-    
+     
     private static final UUID MY_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
     
 	public boolean isConnected() {
@@ -31,10 +30,10 @@ public class Bluetooth extends Thread {
 		this.connected = connected;
 	}
 
-	public Bluetooth(Application application) throws Exception{
+	public Bluetooth(){
 		mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 		this.connected = false;
-		this.application = application;
+		//this.application = application;
 	}
 
 	public boolean isEnabled(){
@@ -104,42 +103,5 @@ public class Bluetooth extends Thread {
 	}
 
 
-	public void pair() {
-		Set<BluetoothDevice> pairedDevices = mBluetoothAdapter.getBondedDevices();
-		//ArrayAdapter<String> mArrayAdapter = new ArrayAdapter(GeoVibe.getInstance().getAppContext(), R.id.message);
-		AlertDialog.Builder ab=new AlertDialog.Builder(this.application.getApplicationContext());
-		ab.setTitle("Pairment");
-		String[] data = new String[pairedDevices.size()];
-		
-		int i = 0;
-		// If there are paired devices
-		if (pairedDevices.size() > 0) {
-		    // Loop through paired devices
-		    for (BluetoothDevice device : pairedDevices) {
-		        // Add the name and address to an array adapter to show in a ListView
-		        //mArrayAdapter.add(device.getName() + "\n" + device.getAddress());
-		    	data[i] = device.getName() + "\n" + device.getAddress();
-		    	i++;
-		    }
-		}
-		
-		ab.setSingleChoiceItems(data, 0,new DialogInterface.OnClickListener() {
-			public void onClick(DialogInterface dialog, int whichButton) {
-				
-			}
-		}).setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-			 public void onClick(DialogInterface dialog, int whichButton) {
-				 //showMessage("select:"+GeoVibe.getInstance().getDestAddressGP(option).toString());
-				 
-			 }
-		 }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-			 public void onClick(DialogInterface dialog, int whichButton) {
-				 // on cancel button action
-			 }
-		 });
-		ab.show();
-		
-		
-		
-	}
+
 }

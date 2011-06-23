@@ -1,17 +1,38 @@
 package com.innovalley.bt;
 
-import android.app.Application;
-import android.content.SharedPreferences;
 
-public class BluetoothManager {
-	private Bluetooth[] devices = new Bluetooth[5];
-	private Application application = null;
-	private SharedPreferences preferences = null; 
+
+public class BluetoothManager extends Thread{
+	private static BluetoothManager INSTANCE = null;
+	private Bluetooth btDevice = null;
 	
-	public BluetoothManager(Application application){
-		this.application = application;
-		this.preferences = this.application.getSharedPreferences("preferences", 0);
-		
-		devices[0].init(this.preferences.getString("device_0_address", "00:00:00:00:00:00"));
+	
+	public static BluetoothManager getInstance() {
+		if(INSTANCE == null) INSTANCE = new BluetoothManager();
+		return INSTANCE;
 	}
+	public BluetoothManager(){
+		this.btDevice=new Bluetooth();
+	}
+	
+	public void init(String mac){
+		try{
+			this.btDevice.init(mac);
+			this.btDevice.connect();
+			this.btDevice.sendMessage("CMD=1\n\r");
+		}catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void sendMessageTest(){
+		try {
+			this.btDevice.sendMessage("CMD=0,005,050,01,50\n\r");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 }
