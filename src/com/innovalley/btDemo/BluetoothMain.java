@@ -2,12 +2,10 @@ package com.innovalley.btDemo;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.view.View;
 import android.widget.Button;
 
 import com.innovalley.bluetooth.R;
-import com.innovalley.bt.Bluetooth;
 import com.innovalley.bt.BluetoothManager;
 
 
@@ -19,7 +17,7 @@ public class BluetoothMain extends Activity {
 	
 	//private String deviceMac ="00:13:43:02:64:83";//GPShoe Izquierdo Azul=>00:13:43:02:64:83
 	private String deviceMac ="00:13:43:02:3E:FC";//GPShoe Derecho Azul=>00:13:43:02:64:83
-	private Bluetooth btDevice = null;
+	private BluetoothManager btManager = null;
 	
 	
     @Override
@@ -27,12 +25,7 @@ public class BluetoothMain extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.demo1);
         
-        try {
-			this.btDevice = new Bluetooth();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+        this.btManager = new BluetoothManager();
         this.send=(Button)findViewById(R.id.send);
         this.onOff=(Button)findViewById(R.id.onOff);
         
@@ -49,7 +42,8 @@ public class BluetoothMain extends Activity {
 			@Override
 			public void onClick(View arg0) {
 				try {
-					BluetoothManager.getInstance().init(deviceMac);			
+					//BluetoothManager.getInstance().init(deviceMac);
+					btManager.init(deviceMac);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -61,7 +55,8 @@ public class BluetoothMain extends Activity {
 			@Override
 			public void onClick(View arg0) {
 				try {
-					BluetoothManager.getInstance().sendMessageTest();
+					//BluetoothManager.getInstance().sendMessageTest();
+					btManager.sendMessageTest();
 				} catch (Exception e) {
 				}
 			}

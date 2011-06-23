@@ -2,17 +2,13 @@ package com.innovalley.bt;
 
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.Set;
 import java.util.UUID;
 
-import android.app.AlertDialog;
-import android.app.Application;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
-import android.content.DialogInterface;
 
-public class Bluetooth extends Thread {
+public class Bluetooth{
 	private String address;
 	private BluetoothAdapter mBluetoothAdapter = null;
     private BluetoothSocket btSocket = null;
