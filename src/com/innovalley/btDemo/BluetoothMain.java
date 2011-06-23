@@ -2,6 +2,7 @@ package com.innovalley.btDemo;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.view.View;
 import android.widget.Button;
 
@@ -25,7 +26,6 @@ public class BluetoothMain extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.demo1);
         
-        this.btManager = new BluetoothManager();
         this.send=(Button)findViewById(R.id.send);
         this.onOff=(Button)findViewById(R.id.onOff);
         
@@ -42,10 +42,10 @@ public class BluetoothMain extends Activity {
 			@Override
 			public void onClick(View arg0) {
 				try {
-					//BluetoothManager.getInstance().init(deviceMac);
-					btManager.init(deviceMac);
+					btManager = new BluetoothManager();
+					btManager.connect();
+					
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
@@ -55,9 +55,10 @@ public class BluetoothMain extends Activity {
 			@Override
 			public void onClick(View arg0) {
 				try {
-					//BluetoothManager.getInstance().sendMessageTest();
-					btManager.sendMessageTest();
+					btManager.turnLeft();
+					SystemClock.sleep(500);
 				} catch (Exception e) {
+					e.printStackTrace();
 				}
 			}
 		});
