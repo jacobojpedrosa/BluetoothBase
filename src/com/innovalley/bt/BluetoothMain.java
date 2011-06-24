@@ -1,8 +1,12 @@
 package com.innovalley.bt;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
@@ -63,6 +67,27 @@ public class BluetoothMain extends Activity {
 		});
 		
 	}
+	
+	@Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+        case R.id.goSettings:
+        	Intent btSettings = new Intent(getApplicationContext(), BluetoothSettings.class);
+			startActivity(btSettings);
+        	return true;
+        default:
+            return super.onOptionsItemSelected(item);
+        }
+    }
+	
+	
+	@Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.bluetooth_menu, menu);
+        return true;
+    }
     
     
     

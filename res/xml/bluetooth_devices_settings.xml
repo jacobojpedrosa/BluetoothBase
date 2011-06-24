@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+  xmlns:android="http://schemas.android.com/apk/res/android">
+	<PreferenceCategory android:title="Device 0 Settings">
+		<EditTextPreference
+		 android:title="Device 0 name"
+		 android:summary="Set the device 0 name"
+		 android:key="device_0_name"
+		 android:defaultValue="Device0"/>
+  		<EditTextPreference
+		 android:title="Device 0 MAC"
+		 android:summary="Set the device 0 mac address"
+		 android:key="device_0_address"
+		 android:defaultValue="00:00:00:00:00:00"/>
+	</PreferenceCategory>
+	<PreferenceCategory android:title="Device 1 Settings">
+		<EditTextPreference
+		 android:title="Device 1 name"
+		 android:summary="Set the device 1 name"
+		 android:key="device_1_name"
+		 android:defaultValue="Device1"/>
+  		<EditTextPreference
+		 android:title="Device 1 MAC"
+		 android:summary="Set the device 1 mac address"
+		 android:key="device_1_address"
+		 android:defaultValue="00:00:00:00:00:00"/>
+	</PreferenceCategory>
+	<PreferenceCategory android:title="Device 2 Settings">
+		<EditTextPreference
+		 android:title="Device 2 name"
+		 android:summary="Set the device 2 name"
+		 android:key="device_2_name"
+		 android:defaultValue="Device2"/>
+  		<EditTextPreference
+		 android:title="Device 2 MAC"
+		 android:summary="Set the device 2 mac address"
+		 android:key="device_2_address"
+		 android:defaultValue="00:00:00:00:00:00"/>
+	</PreferenceCategory>
+	<PreferenceCategory android:title="Device 3 Settings">
+		<EditTextPreference
+		 android:title="Device 3 name"
+		 android:summary="Set the device 3 name"
+		 android:key="device_3_name"
+		 android:defaultValue="Device2"/>
+  		<EditTextPreference
+		 android:title="Device 3 MAC"
+		 android:summary="Set the device 3 mac address"
+		 android:key="device_3_address"
+		 android:defaultValue="00:00:00:00:00:00"/>
+	</PreferenceCategory>
+</PreferenceScreen>

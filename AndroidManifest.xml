@@ -15,9 +15,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-		<activity android:name=".BluetoothSettings"
-                  android:label="Settings"
-                  android:theme="@android:style/Theme.Dialog"
-                  android:screenOrientation="portrait" />
+		<activity android:name="com.innovalley.bt.BluetoothSettings"
+                  android:label="@string/app_name"
+          		  android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+		<activity android:name="com.innovalley.bt.BluetoothDevicesSettings"
+                  android:label="@string/app_name"
+          		  android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 </manifest>
