@@ -1,4 +1,4 @@
-package com.innovalley.btDemo;
+package com.innovalley.bt;
 
 import android.app.Activity;
 
