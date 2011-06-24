@@ -12,7 +12,7 @@ import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.content.DialogInterface;
 
-public class Bluetooth{
+public class Bluetooth{ 
 	private String address;
 	private BluetoothAdapter mBluetoothAdapter = null;
 	private BluetoothSocket btSocket = null;
@@ -21,9 +21,10 @@ public class Bluetooth{
 	private Application application;
 	private static final UUID MY_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
 
-	public Bluetooth() {
+	public Bluetooth(String macAddress) {
 		mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-		//this.init("00:13:43:02:3E:FC");
+		this.address = macAddress;
+		this.openSocket();
 		this.connected = false;
 	}
 
@@ -37,11 +38,6 @@ public class Bluetooth{
 
 	public boolean isEnabled() {
 		return this.mBluetoothAdapter.isEnabled();
-	}
-
-	public void init(String address) {
-		this.address = address;
-		this.openSocket();
 	}
 
 	public void openSocket() {
@@ -125,6 +121,4 @@ public class Bluetooth{
 		ab.show();
 
 	}
-
-
 }

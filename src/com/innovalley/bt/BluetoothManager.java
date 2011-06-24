@@ -1,29 +1,22 @@
 package com.innovalley.bt;
-
 import android.os.SystemClock;
 
+public class BluetoothManager extends Thread {
 
-
-public class BluetoothManager extends Thread{
-	private Bluetooth btDevice = null;
+	private Bluetooth left = null;
 	private static final int timeBlock = 500;
 
-	public BluetoothManager() throws Exception {
-		this.btDevice = new Bluetooth();
+	public BluetoothManager(String mac) throws Exception {
+		this.left = new Bluetooth(mac);
 	}
 
 	public boolean isBtEnabled() {
-		if (this.btDevice.isEnabled())return true;
+		if (this.left.isEnabled())return true;
 		return false;
 	}
 
-	public void connect() throws Exception {
-		this.btDevice.init("00:13:43:02:3E:FC");
-		this.btDevice.connect();
-		this.btDevice.sendMessage("CMD=1\n\r");
-		SystemClock.sleep(500);
-		//TTT
-		this.run();
+	public void run() {
+		connect();
 	}
 
 	public boolean getStatus() {
@@ -31,25 +24,38 @@ public class BluetoothManager extends Thread{
 	}
 
 	public void turnLeft() throws Exception {
-		// TODO Auto-generated method stub
-		this.btDevice.sendMessage("CMD=0,002,050,01,100\\r");
+		this.left.sendMessage("CMD=0,002,050,01,100\\r");
 		SystemClock.sleep(timeBlock);
 	}
 
 	public void reset() throws Exception {
-		this.btDevice.sendMessage("CMD=2\n\r");
-		this.btDevice.disconnect();
-		this.btDevice.connect();
-		this.btDevice.sendMessage("CMD=1\n\r");
+		disconnect();
+		this.left.connect();
+		this.left.sendMessage("CMD=1\n\r");
+		SystemClock.sleep(timeBlock);
 	}
 
 	public void pairDevice(int pairShoe) {
-		this.btDevice.pair();
+		this.left.pair();
 	}
 
 	public void disconnect() throws Exception {
-		this.btDevice.sendMessage("CMD=2\n\r");
-		this.btDevice.disconnect();
+		this.left.sendMessage("CMD=2\n\r");
+		this.left.disconnect();
+	}
+	
+	private void connect() {
+		try {
+			this.left.connect();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		try {
+			this.left.sendMessage("CMD=1\n\r");
+			SystemClock.sleep(timeBlock);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 }
