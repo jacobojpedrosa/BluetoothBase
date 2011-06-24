@@ -1,5 +1,7 @@
 package com.innovalley.bt;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 import android.app.Activity;
@@ -35,15 +37,17 @@ public class BluetoothSettings extends Activity {
 	       
 		this.text1.setText(devices);
 		*/
-		String devs= "";
-		for(int i=0; i<=this.maxDevices; i++){
-			if(settings.contains("device_3_address")){
-				//devs=devs+settings.getString("device_"+i+"_name", "00:00:00:00:00:00");
-				devs="si_device";
-			}else{
-				devs=devs+"no_device_"+i+"_name";
-			}
-		}
+	    final ArrayList<HashMap<String,String>> LIST = new ArrayList<HashMap<String,String>>();
+	    Map<String, ?> items = settings.getAll();
+	    
+	    String devs="";
+	    
+	    for(String s : items.keySet()){
+	        HashMap<String,String> temp = new HashMap<String,String>();
+	        temp.put("key", s);
+	        temp.put("value", items.get(s).toString());
+	        LIST.add(temp);
+	    }
 		
 		this.text1.setText(devs);
 	}
