@@ -1,12 +1,9 @@
 package com.innovalley.bt;
 
-<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-=======
->>>>>>> 2969798d1eccbb4db03f4c8b8020eae35dd4fb1c
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -20,7 +17,7 @@ import com.innovalley.bluetooth.R;
 
 public class BluetoothSettings extends Activity {
 	private TextView text1;
-	private int maxDevices = 5;
+	//private int maxDevices = 5;
 	
 	
 	
