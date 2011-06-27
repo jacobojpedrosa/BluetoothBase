@@ -1,4 +1,5 @@
 package com.innovalley.bt;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,47 +11,54 @@ import android.view.View;
 import android.widget.Button;
 import com.innovalley.bluetooth.R;
 
-
 public class BluetoothMain extends Activity {
 	private Button onOff;
 	private Button send;
-
 	// private String deviceMac ="00:13:43:02:64:83";//GPShoe Izquierdo
 	private String deviceMac = "00:13:43:02:64:83";
-	private BluetoothManager btManager = null;
+	private int mode = 0; 
+	private String startCmd = "CMD=1\n\r";
+	//private String endCmd = "CMD=2";
+	private String cmd = "CMD=0,002,050,01,100\n\r";	
+	private BluetoothManager btManager;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.demo1);
-
-		this.send = (Button) findViewById(R.id.send);
-		this.onOff = (Button) findViewById(R.id.onOff);
+		send = (Button) findViewById(R.id.send);
+		onOff = (Button) findViewById(R.id.onOff);
 
 	}
 
 	@Override
 	protected void onResume() {
-		// TODO Auto-generated method stub
 		super.onResume();
-
-		this.onOff.setOnClickListener(new View.OnClickListener() {
+		onOff.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
-				try {
-					btManager = new BluetoothManager(deviceMac);
-					btManager.start();
-				} catch (Exception e) {
-					e.printStackTrace();
+				btManager = new BluetoothManager(deviceMac);
+				if (mode == 0) {					
+					try {
+						btManager.start();						
+						//btManager.send(startCmd);
+						SystemClock.sleep(500);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					mode = 1;
+				} else {
+					mode = 0;
+					btManager.disconnect();
 				}
 			}
 		});
 
-		this.send.setOnClickListener(new View.OnClickListener() {
+		send.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
 				try {
-					btManager.turnLeft();
+					btManager.send(cmd);
 					SystemClock.sleep(500);
 				} catch (Exception e) {
 					e.printStackTrace();
