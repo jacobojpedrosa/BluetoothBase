@@ -2,10 +2,15 @@ package com.innovalley.bt;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.Set;
 import java.util.UUID;
+
+import android.app.AlertDialog;
+import android.app.Application;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
+import android.content.DialogInterface;
 
 public class Bluetooth {
 	
@@ -21,6 +26,9 @@ public class Bluetooth {
 	// A means of writing data to a target in a byte-wise manner.
 	private OutputStream outStream;
 	
+	//Application 
+	private Application application;
+	
     // Constants that indicate the current connection state
     public static final int STATE_NONE = 0;       // we're doing nothing
     public static final int STATE_CONNECTING = 1; // now initiating an outgoing connection
@@ -30,9 +38,10 @@ public class Bluetooth {
 
 	private static final UUID MY_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
 
-	public Bluetooth(String macAddress) {
+	public Bluetooth(String macAddress, Application application) {
 		mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter(); // Local
 		remoteDevice = mBluetoothAdapter.getRemoteDevice(macAddress); // Remote
+		this.application=application;
 		try {
 			if (remoteDevice == null)
 				throw new Exception("It couldn't be connected with the device "	+ macAddress);
@@ -92,5 +101,35 @@ public class Bluetooth {
 
 	public boolean isEnabled() {
 		return mBluetoothAdapter.isEnabled();
+	}
+	
+	public void pair(){
+		Set<BluetoothDevice> pairedDevices = mBluetoothAdapter.getBondedDevices();
+		AlertDialog.Builder ab = new AlertDialog.Builder(this.application.getApplicationContext());
+		ab.setTitle("Pairment");
+		String[] data = new String[pairedDevices.size()];
+		int i = 0;
+		// If there are paired devices
+		if (pairedDevices.size() > 0) {
+			// Loop through paired devices
+			for (BluetoothDevice remoteDevice : pairedDevices) {
+				data[i] = remoteDevice.getName() + "\n" + remoteDevice.getAddress();
+				i++;
+			}
+		}
+
+		ab.setSingleChoiceItems(data, 0, new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int whichButton) {
+
+			}
+		}).setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int whichButton) {
+			}
+		}).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int whichButton) {
+				// on cancel button action
+			}
+		});
+		ab.show();
 	}
 }

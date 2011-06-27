@@ -1,13 +1,16 @@
 package com.innovalley.bt;
+import android.app.Application;
 import android.os.SystemClock;
 
 public class BluetoothManager extends Thread {
 
 	private Bluetooth btDevice;
 	private static final int timeBlock = 500;
-
-	public BluetoothManager(String mac){
-		btDevice = new Bluetooth(mac);
+	private Application application;
+	
+	public BluetoothManager(String mac, Application application){
+		this.application=application;
+		btDevice = new Bluetooth(mac, this.application);
 	}
 
 	public boolean isBtEnabled() {
@@ -61,34 +64,8 @@ public class BluetoothManager extends Thread {
 		}
 	}
 	
-//	public void pair() {
-//		Set<BluetoothDevice> pairedDevices = mBluetoothAdapter.getBondedDevices();
-//		AlertDialog.Builder ab = new AlertDialog.Builder(this.application.getApplicationContext());
-//		ab.setTitle("Pairment");
-//		String[] data = new String[pairedDevices.size()];
-//		int i = 0;
-//		// If there are paired devices
-//		if (pairedDevices.size() > 0) {
-//			// Loop through paired devices
-//			for (BluetoothDevice device : pairedDevices) {
-//				data[i] = device.getName() + "\n" + device.getAddress();
-//				i++;
-//			}
-//		}
-//
-//		ab.setSingleChoiceItems(data, 0, new DialogInterface.OnClickListener() {
-//			public void onClick(DialogInterface dialog, int whichButton) {
-//
-//			}
-//		}).setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-//			public void onClick(DialogInterface dialog, int whichButton) {
-//			}
-//		}).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-//			public void onClick(DialogInterface dialog, int whichButton) {
-//				// on cancel button action
-//			}
-//		});
-//		ab.show();
-//	}
+	public void pair() {
+		btDevice.pair();
+	}
 	
 }
