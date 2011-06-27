@@ -17,7 +17,7 @@ import android.widget.ListView;
 import com.innovalley.bluetooth.R;
 
 public class BluetoothSettings extends Activity {
-	private int maxDevices = 5;
+	//private int maxDevices = 5;
 	private SharedPreferences settings;
 	private ListView viewListBtDevices;
 	private String[] DEVICES;
