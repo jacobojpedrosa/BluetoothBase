@@ -44,6 +44,12 @@ public class BluetoothManager extends Thread {
 
 	public void disconnect() {	
 		try {
+			this.btDevice.sendMessage("CMD=2\n\r");
+			SystemClock.sleep(timeBlock);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		try {
 		btDevice.disconnect();
 		} catch (Exception e) {
 			e.printStackTrace();

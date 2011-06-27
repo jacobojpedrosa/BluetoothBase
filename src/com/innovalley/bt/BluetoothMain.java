@@ -21,26 +21,27 @@ public class BluetoothMain extends Activity {
 	
 	private int mode = 0; 
 	private String startCmd = "CMD=1\n\r";
-	//private String endCmd = "CMD=2";
+	private String endCmd = "CMD=2";
 	private String cmd = "CMD=0,002,050,01,100\n\r";	
 	private BluetoothManager btManager;
-
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.demo1);
 		send = (Button) findViewById(R.id.send);
 		onOff = (Button) findViewById(R.id.onOff);
+		
 
 	}
-
+	
 	@Override
 	protected void onResume() {
 		super.onResume();
 		onOff.setOnClickListener(new View.OnClickListener() {
 			@Override
-			public void onClick(View arg0) {
-				btManager = new BluetoothManager(deviceMac);
+			public void onClick(View arg0) {				
+				btManager = new BluetoothManager(deviceMac,getApplication());
 				if (mode == 0) {					
 					try {
 						btManager.start();						
@@ -85,6 +86,11 @@ public class BluetoothMain extends Activity {
 		}
 	}
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();

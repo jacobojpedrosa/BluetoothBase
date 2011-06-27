@@ -83,8 +83,8 @@ public class Bluetooth {
 
 	public void disconnect() throws Exception {
 		try {
-			btSocket.close();
 			outStream.close();
+			btSocket.close();			
 			connected = false;
 		} catch (Exception e2) {
 			throw new Exception("Unable to close socket during connection failure" + e2.getMessage());
