@@ -35,6 +35,7 @@ public class BluetoothSettings extends Activity {
 		
 		this.viewListBtDevices.setOnItemClickListener(new OnItemClickListener() {
 		    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+		    	//DEVICES[position]
 		    	
 		    }
 		  });
