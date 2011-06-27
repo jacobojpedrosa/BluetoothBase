@@ -1,55 +1,44 @@
 package com.innovalley.bt;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.TextView;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import com.innovalley.bluetooth.R;
 
 public class BluetoothSettings extends Activity {
-	private TextView text1;
-	//private int maxDevices = 5;
-	
-	
+	private int maxDevices = 5;
+	private SharedPreferences settings;
+	private ListView viewListBtDevices;
+	private String[] DEVICES;
 	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.bluetooth_settings);
-        
-		this.text1=(TextView)findViewById(R.id.textView1);
+		setContentView(R.layout.bluetooth_devices_list);
+		this.settings = PreferenceManager.getDefaultSharedPreferences(this);
 		
-		// Restore preferences
-	    SharedPreferences settings = getSharedPreferences("bluetooth_devices_settings", 0);
-	    /*String devices = settings.
-	    String dev0 = settings.getString("device_0_name", "00:00:00:00:00:00");
-	       
-		this.text1.setText(devices);
-		*/
-	    final ArrayList<HashMap<String,String>> LIST = new ArrayList<HashMap<String,String>>();
-	    Map<String, ?> items = settings.getAll();
-	    
-	    String devs="";
-	    
-	    for(String s : items.keySet()){
-	        HashMap<String,String> temp = new HashMap<String,String>();
-	        temp.put("key", s);
-	        temp.put("value", items.get(s).toString());
-	        LIST.add(temp);
-	    }
+		this.loadDevices();
+		this.viewListBtDevices = (ListView)findViewById(R.id.device);
+		this.viewListBtDevices.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_expandable_list_item_1 , DEVICES));
 		
-		this.text1.setText(devs);
+		this.viewListBtDevices.setOnItemClickListener(new OnItemClickListener() {
+		    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+		    	
+		    }
+		  });
+		
 	}
 
 
@@ -73,4 +62,15 @@ public class BluetoothSettings extends Activity {
             return super.onOptionsItemSelected(item);
         }
     }
+	
+	private void loadDevices(){
+		//String[] devices = new String[this.maxDevices];
+		this.DEVICES = new String[10];
+		for(int i=0; i<this.DEVICES.length; i++){
+			if(settings.getString("device_"+i+"_name", "Device"+i)!=null){
+				this.DEVICES[i]=settings.getString("device_"+i+"_name", "Device"+i);
+			}else{
+			}
+		}
+	}
 }
