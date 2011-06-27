@@ -7,7 +7,7 @@ import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 
-public class Bluetooth {
+public class Bluetooth extends Thread {
 	
 	// Local device Bluetooth adapter
 	private final BluetoothAdapter mBluetoothAdapter;
@@ -42,6 +42,15 @@ public class Bluetooth {
 		}
 		connected = false;
 	}
+	
+	public void run(){
+		try {
+			connect();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		}
 
 	public void connect() throws Exception {
 		try {

@@ -49,16 +49,17 @@ public class BluetoothManager extends Thread {
 	
 	private void connect() {
 		try {
-			this.btDevice.connect();
+			//this.btDevice.connect();
+			btDevice.start();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		try {
-			this.btDevice.sendMessage("CMD=1\n\r");
-			SystemClock.sleep(timeBlock);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+//		try {
+//			this.btDevice.sendMessage("CMD=1\n\r");
+//			SystemClock.sleep(timeBlock);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
 	}
 	
 //	public void pair() {

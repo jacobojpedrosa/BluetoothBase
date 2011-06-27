@@ -15,7 +15,10 @@ public class BluetoothMain extends Activity {
 	private Button onOff;
 	private Button send;
 	// private String deviceMac ="00:13:43:02:64:83";//GPShoe Izquierdo
-	private String deviceMac = "00:13:43:02:64:83";
+	//private String deviceMac = "00:13:43:02:64:83";
+	//private String deviceMac = "78:1D:BA:13:9F:9F"; //Movil Comet
+	private String deviceMac = "00:09:dd:50:66:ee";//Laptop dongle
+	
 	private int mode = 0; 
 	private String startCmd = "CMD=1\n\r";
 	//private String endCmd = "CMD=2";
@@ -41,7 +44,7 @@ public class BluetoothMain extends Activity {
 				if (mode == 0) {					
 					try {
 						btManager.start();						
-						//btManager.send(startCmd);
+						btManager.send(startCmd);
 						SystemClock.sleep(500);
 					} catch (Exception e) {
 						e.printStackTrace();
