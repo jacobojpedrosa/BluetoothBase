@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -18,6 +19,7 @@ public class BluetoothMain extends Activity {
 	//private String deviceMac = "00:13:43:02:64:83";
 	//private String deviceMac = "78:1D:BA:13:9F:9F"; //Movil Comet
 	//private String deviceMac = "00:09:dd:50:66:ee";//Laptop dongle
+	private static final String TAG = "BluetoothChatService";
 	
 	private int mode = 0; 
 	private String startCmd = "CMD=1\n\r";
@@ -31,8 +33,6 @@ public class BluetoothMain extends Activity {
 		setContentView(R.layout.demo1);
 		send = (Button) findViewById(R.id.send);
 		onOff = (Button) findViewById(R.id.onOff);
-		
-
 	}
 	
 	@Override
@@ -54,6 +54,7 @@ public class BluetoothMain extends Activity {
 				} else {
 					mode = 0;
 					btManager.disconnect();
+					Log.e(TAG, "close() of connect socket failed");
 				}
 			}
 		});

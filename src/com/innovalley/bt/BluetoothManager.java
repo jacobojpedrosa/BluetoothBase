@@ -1,4 +1,5 @@
 package com.innovalley.bt;
+
 import android.app.Application;
 import android.os.SystemClock;
 
@@ -8,13 +9,14 @@ public class BluetoothManager extends Thread {
 	private static final int timeBlock = 500;
 	private Application application;
 	
-	public BluetoothManager(String mac, Application application){
-		this.application=application;
+	public BluetoothManager(String mac, Application application) {
+		this.application = application;
 		btDevice = new Bluetooth(mac, this.application);
 	}
 
 	public boolean isBtEnabled() {
-		if (btDevice.isEnabled()) return true;
+		if (btDevice.isEnabled())
+			return true;
 		return false;
 	}
 
@@ -39,26 +41,20 @@ public class BluetoothManager extends Thread {
 	}
 
 	public void pairDevice(int pairShoe) {
-		//this.btDevice.pair();
+		// this.btDevice.pair();
 	}
 
-	public void disconnect() {	
+	public void disconnect() {
 		try {
-			this.btDevice.sendMessage("CMD=2\n\r");
-			SystemClock.sleep(timeBlock);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		try {
-		btDevice.disconnect();
+			btDevice.disconnect();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	private void connect() {
 		try {
-			this.btDevice.connect();			
+			this.btDevice.connect();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -69,9 +65,9 @@ public class BluetoothManager extends Thread {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void pair() {
 		btDevice.pair();
 	}
-	
+
 }
