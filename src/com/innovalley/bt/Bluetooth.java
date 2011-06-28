@@ -83,7 +83,7 @@ public class Bluetooth {
 
 	public void disconnect() throws Exception {
 		try {			
-			//outStream.close();
+			outStream.close();
 			//outStream.flush();
 			btSocket.close();			
 			connected = false;

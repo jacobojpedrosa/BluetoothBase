@@ -15,8 +15,8 @@ import com.innovalley.bluetooth.R;
 public class BluetoothMain extends Activity {
 	private Button onOff;
 	private Button send;
-	private String deviceMac = "00:13:43:02:64:83";// GPShoe Izquierdo
-	// private String deviceMac ="00:13:43:02:3E:FC";//GPShoe Derecho
+	//private String deviceMac = "00:13:43:02:64:83";// GPShoe Izquierdo
+	private String deviceMac ="00:13:43:02:3E:FC";//GPShoe Derecho
 	// private String deviceMac = "78:1D:BA:13:9F:9F"; //Movil Comet
 	// private String deviceMac = "00:09:dd:50:66:ee";//Laptop dongle
 	private static final String TAG = "BluetoothMain";
@@ -24,7 +24,7 @@ public class BluetoothMain extends Activity {
 	// private String endCmd = "CMD=2";
 	private String cmd = "CMD=0,002,050,01,100";
 	private BluetoothManager btManager;
-
+	private int mode = 0; 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -40,12 +40,18 @@ public class BluetoothMain extends Activity {
 			@Override
 			public void onClick(View arg0) {
 				btManager = new BluetoothManager(deviceMac, getApplication());
-				try {
-					btManager.start();
-					// btManager.send(startCmd);
-					SystemClock.sleep(500);
-				} catch (Exception e) {
-					e.printStackTrace();
+				if (mode == 0) {					
+					try {
+						btManager.start();						
+						SystemClock.sleep(500);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					mode = 1;
+				} else {
+					mode = 0;
+					btManager.disconnect();
+					Log.e(TAG, "close() of connect socket failed");
 				}
 			}
 		});
