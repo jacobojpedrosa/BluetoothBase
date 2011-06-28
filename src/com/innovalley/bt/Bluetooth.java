@@ -12,7 +12,7 @@ import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.content.DialogInterface;
 
-public class Bluetooth extends Thread {
+public class Bluetooth {
 	
 	// Local device Bluetooth adapter
 	private final BluetoothAdapter mBluetoothAdapter;
@@ -51,15 +51,6 @@ public class Bluetooth extends Thread {
 		}
 		connected = false;
 	}
-	
-	public void run(){
-		try {
-			connect();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		}
 
 	public void connect() throws Exception {
 		try {
@@ -91,9 +82,10 @@ public class Bluetooth extends Thread {
 	}
 
 	public void disconnect() throws Exception {
-		try {
-			btSocket.close();
-			outStream.close();
+		try {			
+			//outStream.close();
+			//outStream.flush();
+			btSocket.close();			
 			connected = false;
 		} catch (Exception e2) {
 			throw new Exception("Unable to close socket during connection failure" + e2.getMessage());

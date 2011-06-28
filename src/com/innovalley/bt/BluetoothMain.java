@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -14,37 +15,37 @@ import com.innovalley.bluetooth.R;
 public class BluetoothMain extends Activity {
 	private Button onOff;
 	private Button send;
-	// private String deviceMac ="00:13:43:02:64:83";//GPShoe Izquierdo
+	private String deviceMac ="00:13:43:02:64:83";//GPShoe Izquierdo
 	//private String deviceMac = "00:13:43:02:64:83";
 	//private String deviceMac = "78:1D:BA:13:9F:9F"; //Movil Comet
-	private String deviceMac = "00:09:dd:50:66:ee";//Laptop dongle
+	//private String deviceMac = "00:09:dd:50:66:ee";//Laptop dongle
+	private static final String TAG = "BluetoothChatService";
 	
 	private int mode = 0; 
 	private String startCmd = "CMD=1\n\r";
-	//private String endCmd = "CMD=2";
+	private String endCmd = "CMD=2";
 	private String cmd = "CMD=0,002,050,01,100\n\r";	
 	private BluetoothManager btManager;
-
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.demo1);
 		send = (Button) findViewById(R.id.send);
 		onOff = (Button) findViewById(R.id.onOff);
-
 	}
-
+	
 	@Override
 	protected void onResume() {
 		super.onResume();
 		onOff.setOnClickListener(new View.OnClickListener() {
 			@Override
-			public void onClick(View arg0) {
-				btManager = new BluetoothManager(deviceMac);
+			public void onClick(View arg0) {				
+				btManager = new BluetoothManager(deviceMac,getApplication());
 				if (mode == 0) {					
 					try {
 						btManager.start();						
-						btManager.send(startCmd);
+						//btManager.send(startCmd);
 						SystemClock.sleep(500);
 					} catch (Exception e) {
 						e.printStackTrace();
@@ -53,6 +54,7 @@ public class BluetoothMain extends Activity {
 				} else {
 					mode = 0;
 					btManager.disconnect();
+					Log.e(TAG, "close() of connect socket failed");
 				}
 			}
 		});
@@ -85,6 +87,11 @@ public class BluetoothMain extends Activity {
 		}
 	}
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();
