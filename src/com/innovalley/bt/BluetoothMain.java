@@ -15,7 +15,9 @@ import com.innovalley.bluetooth.R;
 public class BluetoothMain extends Activity {
 	private Button onOff;
 	private Button send;
-	private String deviceMac ="00:13:43:02:64:83";//GPShoe Izquierdo
+	//private String deviceMac ="00:13:43:02:64:83";//GPShoe Izquierdo
+	private String deviceMac ="00:13:43:02:3E:FC";//GPShoe Derecho
+	
 	//private String deviceMac = "00:13:43:02:64:83";
 	//private String deviceMac = "78:1D:BA:13:9F:9F"; //Movil Comet
 	//private String deviceMac = "00:09:dd:50:66:ee";//Laptop dongle
