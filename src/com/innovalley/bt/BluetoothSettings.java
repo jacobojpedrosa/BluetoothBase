@@ -1,12 +1,10 @@
 package com.innovalley.bt;
 
 import android.app.Activity;
-import android.bluetooth.BluetoothDevice;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -48,7 +46,8 @@ public class BluetoothSettings extends Activity {
 		    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 		    	//DEVICES[position]
 		    	 Intent serverIntent = new Intent(getApplicationContext(), BluetoothPairing.class);
-		         startActivity(serverIntent);
+		         //startActivity(serverIntent);
+		    	 startActivityForResult(serverIntent, REQUEST_CONNECT_DEVICE);
 		    }
 		  });
 		
@@ -89,6 +88,22 @@ public class BluetoothSettings extends Activity {
 	
 	
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
-		Toast.makeText(this, R.string.app_name, Toast.LENGTH_SHORT).show();
+		//Toast.makeText(this, R.string.app_name, Toast.LENGTH_SHORT).show();
+		switch (requestCode) {
+        case REQUEST_CONNECT_DEVICE:
+            // When DeviceListActivity returns with a device to connect
+            if (resultCode == Activity.RESULT_OK) {
+                // Get the device MAC address
+                String address = data.getExtras().getString(BluetoothPairing.EXTRA_DEVICE_ADDRESS);
+                // Get the BLuetoothDevice object
+                //BluetoothDevice device = mBluetoothAdapter.getRemoteDevice(address);
+                this.btManager.pairDevice(address);
+                // Attempt to connect to the device
+      
+            }
+            break;
+        case REQUEST_ENABLE_BT:
+        	Toast.makeText(this, R.string.app_name, Toast.LENGTH_SHORT).show();
+        }
     }
 }
