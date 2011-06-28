@@ -45,7 +45,9 @@ public class Bluetooth {
 	}
 	
 	public Bluetooth(String macAddress, Application application) {
-		this(application);
+		//this(application);
+		this.application=application;
+		mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter(); // Local
 		remoteDevice = mBluetoothAdapter.getRemoteDevice(macAddress); // Remote
 		try {
 			if (remoteDevice == null)
