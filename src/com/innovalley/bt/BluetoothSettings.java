@@ -1,10 +1,12 @@
 package com.innovalley.bt;
 
 import android.app.Activity;
+import android.bluetooth.BluetoothDevice;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -13,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.innovalley.bluetooth.R;
 
@@ -21,6 +24,12 @@ public class BluetoothSettings extends Activity {
 	private SharedPreferences settings;
 	private ListView viewListBtDevices;
 	private String[] DEVICES;
+	private BluetoothManager btManager;
+	
+	// Intent request codes
+    private static final int REQUEST_CONNECT_DEVICE = 1;
+    private static final int REQUEST_ENABLE_BT = 2;
+	
 	
 	
 	@Override
@@ -33,10 +42,13 @@ public class BluetoothSettings extends Activity {
 		this.viewListBtDevices = (ListView)findViewById(R.id.device);
 		this.viewListBtDevices.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_expandable_list_item_1 , DEVICES));
 		
+		btManager = new BluetoothManager(getApplication());
+		
 		this.viewListBtDevices.setOnItemClickListener(new OnItemClickListener() {
 		    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 		    	//DEVICES[position]
-		    	
+		    	 Intent serverIntent = new Intent(getApplicationContext(), BluetoothPairing.class);
+		         startActivity(serverIntent);
 		    }
 		  });
 		
@@ -74,4 +86,9 @@ public class BluetoothSettings extends Activity {
 			}
 		}
 	}
+	
+	
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		Toast.makeText(this, R.string.app_name, Toast.LENGTH_SHORT).show();
+    }
 }

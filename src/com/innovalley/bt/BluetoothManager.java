@@ -11,6 +11,11 @@ public class BluetoothManager extends Thread {
 	private Application application;
 	private static final String TAG = "BluetoothManager";
 	
+	public BluetoothManager(Application application) {
+		this.application = application;
+		btDevice = new Bluetooth(this.application);
+	}
+	
 	public BluetoothManager(String mac, Application application) {
 		this.application = application;
 		btDevice = new Bluetooth(mac, this.application);
@@ -70,8 +75,5 @@ public class BluetoothManager extends Thread {
 		}
 	}
 
-	public void pair() {
-		btDevice.pair();
-	}
 
 }
