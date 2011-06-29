@@ -2,15 +2,12 @@ package com.innovalley.bt;
 
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.Set;
 import java.util.UUID;
 
-import android.app.AlertDialog;
 import android.app.Application;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
-import android.content.DialogInterface;
 
 public class Bluetooth {
 	
@@ -29,6 +26,9 @@ public class Bluetooth {
 	//Application 
 	private Application application;
 	
+
+    //private ConnectThread mConnectThread;
+	
     // Constants that indicate the current connection state
     public static final int STATE_NONE = 0;       // we're doing nothing
     public static final int STATE_CONNECTING = 1; // now initiating an outgoing connection
@@ -45,9 +45,9 @@ public class Bluetooth {
 	}
 	
 	public Bluetooth(String macAddress, Application application) {
-		//this(application);
-		this.application=application;
-		mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter(); // Local
+		this(application);
+		//this.application=application;
+		//mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter(); // Local
 		remoteDevice = mBluetoothAdapter.getRemoteDevice(macAddress); // Remote
 		try {
 			if (remoteDevice == null)
@@ -111,4 +111,8 @@ public class Bluetooth {
 		return mBluetoothAdapter.isEnabled();
 	}
 	
+	public void pairDevice(){
+	//	 mConnectedThread = new ConnectedThread(socket);
+	 //    mConnectedThread.start();
+	}
 }

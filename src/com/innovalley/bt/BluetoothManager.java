@@ -79,7 +79,7 @@ public class BluetoothManager extends Thread {
 		// TODO Auto-generated method stub
 		btDevice = new Bluetooth(address, this.application);
 		
-		
+		this.btDevice.pairDevice();
 	}
 
 
