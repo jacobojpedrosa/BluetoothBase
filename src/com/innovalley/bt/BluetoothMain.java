@@ -2,6 +2,7 @@ package com.innovalley.bt;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.util.Log;
@@ -10,6 +11,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
+
 import com.innovalley.bluetooth.R;
 
 public class BluetoothMain extends Activity {
@@ -31,6 +34,11 @@ public class BluetoothMain extends Activity {
 		setContentView(R.layout.demo1);
 		send = (Button) findViewById(R.id.send);
 		onOff = (Button) findViewById(R.id.onOff);
+		
+		SharedPreferences preferences = this.getApplicationContext().getDefaultSharedPreferences("bluetooth_devices_settings", 0);
+		String p = preferences.getString("device_1_name", "Device1");
+		Toast m = Toast.makeText(getApplicationContext(), p, 500);
+		m.show();
 	}
 
 	@Override
